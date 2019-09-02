@@ -4,47 +4,60 @@ using UnityEngine;
 
 public class PacMaNMove : MonoBehaviour
 {
-    public Rigidbody2D rigidbody;
-    
-    [SerializeField]
-    private float speed=4f;
+  public float step = 0.32f;
+  public float stepCollider = 0.32f;
 
-    private Vector3 deplacement=Vector3.zero;
+  [SerializeField]
+  private float speed = 4f;
+
+  private Vector3 deplacement = Vector3.zero;
+  private Vector2 dest = Vector2.zero;
+
+  // Start is called before the first frame update
+  void Start()
+  {
+    dest = transform.position;
+  }
+
+  // Update is called once per frame
+  void FixedUpdate()
+  {
+
+    // Move closer to Destination
+    Vector2 p = Vector2.MoveTowards(transform.position, dest, speed);
+    GetComponent<Rigidbody2D>().MovePosition(p);
     
-    // Start is called before the first frame update
-    void Start()
+
+    // Check for Input if not moving
+    if ((Vector2)transform.position == p)
     {
-        rigidbody=GetComponent<Rigidbody2D>();
+      if ((Input.GetKey(KeyCode.UpArrow)) && (valid(new Vector2(0, stepCollider))))
+        dest = (Vector2)transform.position + new Vector2(0, step);
+      else if ((Input.GetKey(KeyCode.RightArrow)) && (valid(new Vector2(stepCollider, 0))))
+        dest = (Vector2)transform.position + new Vector2(step, 0);
+      else if ((Input.GetKey(KeyCode.DownArrow)) && (valid(new Vector2(0, -stepCollider))))
+        dest = (Vector2)transform.position - new Vector2(0, step);
+      else if ((Input.GetKey(KeyCode.LeftArrow)) && (valid(new Vector2(-stepCollider, 0))))
+        dest = (Vector2)transform.position - new Vector2(step, 0);
+
+
+      // Animation Parameters
+      Vector2 dir = dest - (Vector2)transform.position;
+      GetComponent<Animator>().SetFloat("DirX", dir.x);
+      GetComponent<Animator>().SetFloat("DirY", dir.y);
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
-    {
+
+  }
+
+  bool valid(Vector2 dir)
+  {
+    Vector2 pos = transform.position;
+    RaycastHit2D hit = Physics2D.Linecast(pos + dir, pos);
     
-       if (Input.GetKey(KeyCode.UpArrow))
-       {
-           deplacement=Vector3.up;
-       }
-       if (Input.GetKey(KeyCode.DownArrow))
-       {
-           deplacement=Vector3.down;
-       } 
-       if (Input.GetKey(KeyCode.RightArrow))
-       {
-           deplacement=Vector3.right;
-       } 
-       if (Input.GetKey(KeyCode.LeftArrow))
-       {
-           deplacement=Vector3.left;
-       } 
-
-       transform.Translate(deplacement*speed*Time.deltaTime);
-
-       // S'il y a un contact avec un mur, la vitesse est nulle donc on arrête le déplacement
-       //if (rigidbody.velocity.x==0f || rigidbody.velocity.y==0f)
-       //{
-         //  deplacement=Vector3.zero;
-       //}
-        
-    }
+    if (hit.collider.name == "Walls")
+      return false;
+    else
+      return true;
+  }
 }

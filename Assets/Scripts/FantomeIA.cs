@@ -222,22 +222,22 @@ public class FantomeIA : MonoBehaviour
     RaycastHit2D hit = Physics2D.Linecast(pos+ dir, pos);
     if (hit.collider == GetComponent<Collider2D>())
     {
-      Debug.Log("Collision avec self: " + transform.name);
+      //Debug.Log("Collision avec self: " + transform.name);
       return true;
     }
     else if (hit.collider.name == "Walls")
     {
-      Debug.Log("Collision avec murs: " + transform.name);
+      //Debug.Log("Collision avec murs: " + transform.name);
       return false;
     }
     else if(hit.collider.name == "pacman")
     {
-      Debug.Log("Collision avec pacman: " + transform.name);
+      //Debug.Log("Collision avec pacman: " + transform.name);
       return true;
     }
     else
     {
-      Debug.Log("Collision avec autre fantome: " + transform.name + "   " + hit.collider.name);
+      //Debug.Log("Collision avec autre fantome: " + transform.name + "   " + hit.collider.name);
       return true;
     }
   }
