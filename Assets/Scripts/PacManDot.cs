@@ -24,7 +24,7 @@ public class PacManDot : MonoBehaviour
     void Update()
     {
 
-        print("Pacman Position : " + GameObject.FindWithTag("pacman").transform.position);
+        //print("Pacman Position : " + GameObject.FindWithTag("pacman").transform.position);
         //print(tilemap.cellBounds);
         Vector3 position = GameObject.FindWithTag("pacman").transform.position;
         Vector3Int positionInt = Vector3Int.zero;
@@ -32,11 +32,11 @@ public class PacManDot : MonoBehaviour
         positionInt.y = Mathf.FloorToInt(position.y);
         positionInt.z = Mathf.FloorToInt(position.z);
 
-        print("Tile Position in Tilemap : " + tilemap.WorldToCell(position));
+        //print("Tile Position in Tilemap : " + tilemap.WorldToCell(position));
 
         Sprite sprite = tilemap.GetSprite(tilemap.WorldToCell(position));
         string newTileSprite;
-        print("Tile Sprite"+sprite);
+        //print("Tile Sprite"+sprite);
         if (sprite == null)
         {
             newTileSprite = "Null";
