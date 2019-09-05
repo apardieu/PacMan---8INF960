@@ -440,6 +440,10 @@ MonoBehaviour:
   step: 0.32
   stepCollider: 0.32
   p: {fileID: 1854078058}
+  inky: {fileID: 1412506252}
+  pinky: {fileID: 6524874}
+  blinky: {fileID: 1792187409}
+  clyde: {fileID: 1393198907}
   speed: 0.08
 --- !u!1 &214851856
 GameObject:
