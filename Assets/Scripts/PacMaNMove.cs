@@ -7,6 +7,10 @@ public class PacMaNMove : MonoBehaviour
   public float step = 0.32f;
   public float stepCollider = 0.32f;
     public PointsManager p;
+    public GameObject inky;
+    public GameObject pinky;
+    public GameObject blinky;
+    public GameObject clyde;
 
     [SerializeField]
   private float speed = 4f;
@@ -14,6 +18,7 @@ public class PacMaNMove : MonoBehaviour
   private Vector3 deplacement = Vector3.zero;
   public static Vector2 dest = Vector2.zero;
     private float vulnerabilityCountDown = 0;
+
     
 
   // Start is called before the first frame update
@@ -25,7 +30,8 @@ public class PacMaNMove : MonoBehaviour
   // Update is called once per frame
   void FixedUpdate()
   {
-        fantomes();
+        //fantomes();
+        fantomesV2();
         Vector2 p;
         // Move closer to Destination
         if (warp)
@@ -97,7 +103,7 @@ public class PacMaNMove : MonoBehaviour
      
   }
 
-    void fantomes()
+   /* void fantomes()
     {
         if(vulnerabilityCountDown<=0)
         {
@@ -120,6 +126,37 @@ public class PacMaNMove : MonoBehaviour
         }
         
 
+    }*/
+
+    void fantomesV2()
+    {
+        if (vulnerabilityCountDown <= 0)
+        {
+            Vector2 pos = transform.position;
+            Vector2 pos1 = blinky.transform.position;
+            Vector2 pos2 = inky.transform.position;
+            Vector2 pos3 = pinky.transform.position;
+            Vector2 pos4 = clyde.transform.position;
+            float col1 = (pos - pos1).magnitude;
+            float col2 = (pos - pos2).magnitude;
+            float col3 = (pos - pos3).magnitude;
+            float col4 = (pos - pos4).magnitude;
+            
+
+            if (col1 <= 0.32 || col2 <= 0.32 || col3 <= 0.32 || col4 <= 0.32 )
+            {
+                print("fantome");
+                vulnerabilityCountDown = 100;
+                p.decrementeLife();
+
+            }
+
+        }
+        else
+        {
+            vulnerabilityCountDown--;
+
+        }
     }
 
 

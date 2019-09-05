@@ -31,7 +31,7 @@ public class FantomeIA : MonoBehaviour
   {
     Vector2 positionPacman = GameObject.FindWithTag("pacman").transform.position;
     Vector2 difference = -((Vector2)transform.position - positionPacman);
-    Debug.Log(difference.ToString("F4") + "   " + transform.position.ToString("F4") + "   " + positionPacman.ToString("F4") + "   " + transform.name);
+    //Debug.Log(difference.ToString("F4") + "   " + transform.position.ToString("F4") + "   " + positionPacman.ToString("F4") + "   " + transform.name);
     float choix1 = Mathf.Max(Mathf.Abs(difference.x), Mathf.Abs(difference.y));
     float choix2 = Mathf.Max(Mathf.Abs(difference.x), Mathf.Abs(difference.y));
     int directionChoix1 = -1;
