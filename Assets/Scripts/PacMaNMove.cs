@@ -9,9 +9,9 @@ public class PacMaNMove : MonoBehaviour
 
   [SerializeField]
   private float speed = 4f;
-
+    private bool warp = false;
   private Vector3 deplacement = Vector3.zero;
-  private Vector2 dest = Vector2.zero;
+  public static Vector2 dest = Vector2.zero;
 
   // Start is called before the first frame update
   void Start()
@@ -22,27 +22,52 @@ public class PacMaNMove : MonoBehaviour
   // Update is called once per frame
   void FixedUpdate()
   {
-
-    // Move closer to Destination
-    Vector2 p = Vector2.MoveTowards(transform.position, dest, speed);
+        Vector2 p;
+        // Move closer to Destination
+        if (warp)
+        {
+            p = Vector2.MoveTowards(transform.position, dest, 100000);
+            warp = false;
+        }
+        else
+        {
+             p = Vector2.MoveTowards(transform.position, dest, speed);
+        }
+    
     GetComponent<Rigidbody2D>().MovePosition(p);
     
 
     // Check for Input if not moving
     if ((Vector2)transform.position == p)
     {
-      if ((Input.GetKey(KeyCode.UpArrow)) && (valid(new Vector2(0, stepCollider))))
-        dest = (Vector2)transform.position + new Vector2(0, step);
-      else if ((Input.GetKey(KeyCode.RightArrow)) && (valid(new Vector2(stepCollider, 0))))
-        dest = (Vector2)transform.position + new Vector2(step, 0);
-      else if ((Input.GetKey(KeyCode.DownArrow)) && (valid(new Vector2(0, -stepCollider))))
-        dest = (Vector2)transform.position - new Vector2(0, step);
-      else if ((Input.GetKey(KeyCode.LeftArrow)) && (valid(new Vector2(-stepCollider, 0))))
-        dest = (Vector2)transform.position - new Vector2(step, 0);
+            if ((Input.GetKey(KeyCode.UpArrow)) && (valid(new Vector2(0, stepCollider))))
+
+                dest = (Vector2)transform.position + new Vector2(0, step);
+            else if ((Input.GetKey(KeyCode.RightArrow)) && (valid(new Vector2(stepCollider, 0))))
+                if (p.x > 4.317f)
+                {
+                    warp = true;
+                    dest = new Vector2(-4.317f, 0.16f);
+                }
+                else
+                    dest = (Vector2)transform.position + new Vector2(step, 0);
+            else if ((Input.GetKey(KeyCode.DownArrow)) && (valid(new Vector2(0, -stepCollider))))
+                dest = (Vector2)transform.position - new Vector2(0, step);
+            else if ((Input.GetKey(KeyCode.LeftArrow)) && (valid(new Vector2(-stepCollider, 0))))
+                if (p.x < -4.317f)
+                {
+                    dest = new Vector2(4.317f, 0.16f);
+                    warp = true;
+                }
+                else
+                    dest = (Vector2)transform.position - new Vector2(step, 0);
 
 
       // Animation Parameters
       Vector2 dir = dest - (Vector2)transform.position;
+            if (warp)
+                dir *= -1;
+
       GetComponent<Animator>().SetFloat("DirX", dir.x);
       GetComponent<Animator>().SetFloat("DirY", dir.y);
 
