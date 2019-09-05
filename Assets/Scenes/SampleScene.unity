@@ -453,7 +453,7 @@ GameObject:
   - component: {fileID: 214851857}
   m_Layer: 0
   m_Name: Life1
-  m_TagString: Untagged
+  m_TagString: life1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -572,7 +572,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 6.2340097
+  orthographic size: 5.73
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -3559,7 +3559,7 @@ GameObject:
   - component: {fileID: 1059482803}
   m_Layer: 0
   m_Name: Life2
-  m_TagString: Untagged
+  m_TagString: life2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3988,8 +3988,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 26, y: -1096}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -323.8, y: -548}
+  m_SizeDelta: {x: -699.7, y: -1096}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1511735937
 MonoBehaviour:

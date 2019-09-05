@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - pacman
+  - life1
+  - life2
   layers:
   - Default
   - TransparentFX
