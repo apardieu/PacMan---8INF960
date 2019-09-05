@@ -59,6 +59,26 @@ public class PacMaNMove : MonoBehaviour
     if (hit.collider.name == "Walls")
       return false;
     else
-      return true;
+        {
+            
+            
+            return true;
+        }
+     
   }
+
+
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        print("Pacman");
+    }
+    /*void OnTriggerEnter(Collider col)
+    {
+        print("BAM");
+        if (col.gameObject.name == "inky"|| col.gameObject.name == "blinky" || col.gameObject.name == "clyde" || col.gameObject.name == "pinky" )
+        {
+            print("BOUM");
+        }
+    }*/
+
 }
