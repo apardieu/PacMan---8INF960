@@ -226,30 +226,19 @@ public class FantomeIA : MonoBehaviour
     {
       return false;
     }
-<<<<<<< HEAD
     else if(hit.collider.name == "pacman")
     {
             //Debug.Log("Collision avec pacman: " + transform.name);
             
       return true;
     }
-=======
->>>>>>> master
     else
     {
       return true;
     }
   }
-
-<<<<<<< HEAD
     void OnCollisionEnter2D(Collision2D col)
     {
        print("Ghost");
     }
-=======
-  void OnCollisionEnter2D(Collision2D col)
-  {
-     print("Ghost");
-  }
->>>>>>> master
 }
