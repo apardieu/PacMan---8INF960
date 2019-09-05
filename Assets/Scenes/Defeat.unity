@@ -125,7 +125,6 @@ GameObject:
   - component: {fileID: 6524877}
   - component: {fileID: 6524876}
   - component: {fileID: 6524875}
-  - component: {fileID: 6524880}
   m_Layer: 0
   m_Name: pinky
   m_TagString: Untagged
@@ -261,21 +260,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6524880
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6524874}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c4e2450dce989440b028dd72a0f6ba5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 0.05
-  step: 0.32
-  stepCollider: 0.32
 --- !u!1 &43307919
 GameObject:
   m_ObjectHideFlags: 0
@@ -886,7 +870,6 @@ GameObject:
   - component: {fileID: 1393198913}
   - component: {fileID: 1393198912}
   - component: {fileID: 1393198911}
-  - component: {fileID: 1393198910}
   - component: {fileID: 1393198909}
   - component: {fileID: 1393198908}
   m_Layer: 0
@@ -943,21 +926,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &1393198910
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1393198907}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c4e2450dce989440b028dd72a0f6ba5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 0.05
-  step: 0.32
-  stepCollider: 0.32
 --- !u!95 &1393198911
 Animator:
   serializedVersion: 3
@@ -1050,7 +1018,6 @@ GameObject:
   - component: {fileID: 1412506257}
   - component: {fileID: 1412506256}
   - component: {fileID: 1412506255}
-  - component: {fileID: 1412506258}
   - component: {fileID: 1412506254}
   - component: {fileID: 1412506253}
   m_Layer: 0
@@ -1188,21 +1155,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1412506258
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1412506252}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c4e2450dce989440b028dd72a0f6ba5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 0.05
-  step: 0.32
-  stepCollider: 0.32
 --- !u!1 &1597569347
 GameObject:
   m_ObjectHideFlags: 0
@@ -1280,7 +1232,6 @@ GameObject:
   - component: {fileID: 1792187412}
   - component: {fileID: 1792187411}
   - component: {fileID: 1792187410}
-  - component: {fileID: 1792187415}
   - component: {fileID: 1792187414}
   - component: {fileID: 1792187413}
   m_Layer: 0
@@ -1418,21 +1369,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &1792187415
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1792187409}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c4e2450dce989440b028dd72a0f6ba5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 0.05
-  step: 0.32
-  stepCollider: 0.32
 --- !u!1 &1854078057
 GameObject:
   m_ObjectHideFlags: 0
@@ -1511,7 +1447,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 11, y: -382}
+  m_AnchoredPosition: {x: 4, y: -379}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1974394474
@@ -1536,7 +1472,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 20
+    m_FontSize: 18
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 0
@@ -1547,7 +1483,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: GAME OVER
+  m_Text: GAME OVER...
 --- !u!222 &1974394475
 CanvasRenderer:
   m_ObjectHideFlags: 0
