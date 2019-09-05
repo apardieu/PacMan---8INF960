@@ -6,15 +6,18 @@ public class PacMaNMove : MonoBehaviour
 {
   public float step = 0.32f;
   public float stepCollider = 0.32f;
+    public PointsManager p;
 
-  [SerializeField]
+    [SerializeField]
   private float speed = 4f;
     private bool warp = false;
   private Vector3 deplacement = Vector3.zero;
   public static Vector2 dest = Vector2.zero;
+    private float vulnerabilityCountDown = 0;
+    
 
   // Start is called before the first frame update
-  void Start()
+    void Start()
   {
     dest = transform.position;
   }
@@ -22,6 +25,7 @@ public class PacMaNMove : MonoBehaviour
   // Update is called once per frame
   void FixedUpdate()
   {
+        fantomes();
         Vector2 p;
         // Move closer to Destination
         if (warp)
@@ -70,8 +74,9 @@ public class PacMaNMove : MonoBehaviour
 
       GetComponent<Animator>().SetFloat("DirX", dir.x);
       GetComponent<Animator>().SetFloat("DirY", dir.y);
+            
 
-    }
+        }
 
 
   }
@@ -84,6 +89,39 @@ public class PacMaNMove : MonoBehaviour
     if (hit.collider.name == "Walls")
       return false;
     else
-      return true;
+        {
+            
+            
+            return true;
+        }
+     
   }
+
+    void fantomes()
+    {
+        if(vulnerabilityCountDown<=0)
+        {
+            Vector2 pos = transform.position;
+            Collider2D hitFront = Physics2D.OverlapCircle(pos, 0.32f);
+
+            if (hitFront.name == "blinky" || hitFront.name == "pinky" || hitFront.name == "inky" || hitFront.name == "clyde")
+            {
+                print("fantome");
+                vulnerabilityCountDown = 50;
+                p.decrementeLife();
+
+            }
+
+        }
+        else
+        {
+            vulnerabilityCountDown--;
+            
+        }
+        
+
+    }
+
+
+
 }

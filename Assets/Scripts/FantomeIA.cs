@@ -232,7 +232,8 @@ public class FantomeIA : MonoBehaviour
     }
     else if(hit.collider.name == "pacman")
     {
-      //Debug.Log("Collision avec pacman: " + transform.name);
+            //Debug.Log("Collision avec pacman: " + transform.name);
+            
       return true;
     }
     else
@@ -241,4 +242,9 @@ public class FantomeIA : MonoBehaviour
       return true;
     }
   }
+
+    void OnCollisionEnter2D(Collision2D col)
+    {
+       print("Ghost");
+    }
 }
