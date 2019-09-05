@@ -439,6 +439,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   step: 0.32
   stepCollider: 0.32
+  p: {fileID: 1854078058}
   speed: 0.08
 --- !u!1 &214851856
 GameObject:
