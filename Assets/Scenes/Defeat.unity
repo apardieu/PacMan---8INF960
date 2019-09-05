@@ -423,7 +423,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   step: 0.32
   stepCollider: 0.32
+<<<<<<< HEAD
   p: {fileID: 0}
+=======
+>>>>>>> master
   speed: 0.08
 --- !u!1 &181161895
 GameObject:
@@ -709,8 +712,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+<<<<<<< HEAD
       - m_Target: {fileID: 1854078057}
         m_MethodName: 
+=======
+      - m_Target: {fileID: 1854078058}
+        m_MethodName: changeScene
+>>>>>>> master
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1398,7 +1406,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f20b0d6c126cede44ac8ad6991b6857a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
   sceneNameToLoad: Opening
+=======
+  sceneNameToLoad: SampleScene
+>>>>>>> master
 --- !u!4 &1854078059
 Transform:
   m_ObjectHideFlags: 0

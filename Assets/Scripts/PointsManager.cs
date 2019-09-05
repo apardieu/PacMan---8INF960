@@ -43,9 +43,18 @@ public class PointsManager : MonoBehaviour
     public void decrementeLife()
     {
         nblife--;
+<<<<<<< HEAD
         if(nblife==0)
         {
             changeScene();
         }
+=======
+        if (nblife == 2)
+            Destroy(GameObject.FindWithTag("life1"));
+        if (nblife == 1)
+            Destroy(GameObject.FindWithTag("life2"));
+        if(nblife==0)
+            changeScene();
+>>>>>>> master
     }
 }
