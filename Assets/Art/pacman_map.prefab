@@ -211,6 +211,24 @@ Tilemap:
       m_ObjectToInstantiate: {fileID: 0}
       m_TileFlags: 1
       m_ColliderType: 1
+  - first: {x: 0, y: 1, z: 0}
+    second:
+      m_TileIndex: 14
+      m_TileSpriteIndex: 14
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 1
+      m_ObjectToInstantiate: {fileID: 0}
+      m_TileFlags: 1
+      m_ColliderType: 1
+  - first: {x: 1, y: 1, z: 0}
+    second:
+      m_TileIndex: 15
+      m_TileSpriteIndex: 15
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 1
+      m_ObjectToInstantiate: {fileID: 0}
+      m_TileFlags: 1
+      m_ColliderType: 1
   m_AnimatedTiles: {}
   m_TileAssetArray:
   - m_RefCount: 1
@@ -241,6 +259,10 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: 66087b3733e718449a947e328667b759, type: 2}
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: 147b94814e5b6d248bec8aca5e16ee56, type: 2}
+  - m_RefCount: 1
+    m_Data: {fileID: 11400000, guid: 39b2ccaef6237294fa1b616704f16a0f, type: 2}
+  - m_RefCount: 1
+    m_Data: {fileID: 11400000, guid: b0d99b6d906adff41bc7f0e79d57e8fd, type: 2}
   m_TileSpriteArray:
   - m_RefCount: 1
     m_Data: {fileID: 21300012, guid: 4a40dd4a7a817db4c8f018e6a8c8bb07, type: 3}
@@ -270,8 +292,12 @@ Tilemap:
     m_Data: {fileID: 21300026, guid: 4a40dd4a7a817db4c8f018e6a8c8bb07, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: 21300028, guid: 4a40dd4a7a817db4c8f018e6a8c8bb07, type: 3}
+  - m_RefCount: 1
+    m_Data: {fileID: 21300000, guid: df6ff0795520ecc40883181f1c4cc0bc, type: 3}
+  - m_RefCount: 1
+    m_Data: {fileID: 21300000, guid: d415279dc8e1e77409dcbf2f6348aec7, type: 3}
   m_TileMatrixArray:
-  - m_RefCount: 14
+  - m_RefCount: 16
     m_Data:
       e00: 1
       e01: 0
@@ -292,7 +318,7 @@ Tilemap:
   m_TileColorArray:
   - m_RefCount: 0
     m_Data: {r: NaN, g: NaN, b: NaN, a: NaN}
-  - m_RefCount: 14
+  - m_RefCount: 16
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -324,7 +350,7 @@ TilemapRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2638258850030157432}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 0

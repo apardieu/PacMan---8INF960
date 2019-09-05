@@ -12,6 +12,7 @@ public class PacManDot : MonoBehaviour
     [SerializeField] private Text scoreText;
     [SerializeField] private Tilemap tilemap;
     [SerializeField] private Tile spriteBleu;
+    [SerializeField] private Rigidbody2D pacmanRigidBody;
     
     
     // Start is called before the first frame update
@@ -21,25 +22,14 @@ public class PacManDot : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
 
-        //print("Pacman Position : " + GameObject.FindWithTag("pacman").transform.position);
-        //print(tilemap.cellBounds);
         Vector3 position = GameObject.FindWithTag("pacman").transform.position;
-        Vector3Int positionInt = Vector3Int.zero;
-        positionInt.x = Mathf.FloorToInt(position.x);
-        positionInt.y = Mathf.FloorToInt(position.y);
-        positionInt.z = Mathf.FloorToInt(position.z);
-
-        //print("Tile Position in Tilemap : " + tilemap.WorldToCell(position));
-
         Sprite sprite = tilemap.GetSprite(tilemap.WorldToCell(position));
-        string newTileSprite;
-        //print("Tile Sprite"+sprite);
+
         if (sprite == null)
         {
-            newTileSprite = "Null";
         }
         else
         {
@@ -50,9 +40,9 @@ public class PacManDot : MonoBehaviour
                 scoreText.text = score.ToString();
 
             }
-            newTileSprite = "Pacman";
+
 
         }
-        newTileSprite = sprite.name;
     }
 }
+
