@@ -8,7 +8,9 @@ public class PointsManager : MonoBehaviour
 {
     [SerializeField] private Text scoreText;
     private bool gameEnded;
-    public string sceneNameToLoad;
+    public string sceneVictory;
+    public string sceneDefeat;
+    private int nblife = 3;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +30,22 @@ public class PointsManager : MonoBehaviour
 
     public void changeScene()
     {
-        SceneManager.LoadScene(sceneNameToLoad);
+        if ("24600".Equals(scoreText.text))
+        {
+            SceneManager.LoadScene(sceneVictory);
+        }
+        else
+        {
+            SceneManager.LoadScene(sceneDefeat);
+        }
+    }
+
+    public void decrementeLife()
+    {
+        nblife--;
+        if(nblife==0)
+        {
+            changeScene();
+        }
     }
 }

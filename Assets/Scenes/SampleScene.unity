@@ -4226,7 +4226,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreText: {fileID: 1511735937}
-  sceneNameToLoad: Victory
+  sceneVictory: Victory
+  sceneDefeat: Defeat
 --- !u!4 &1854078059
 Transform:
   m_ObjectHideFlags: 0
