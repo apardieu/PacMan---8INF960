@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
-//using UnityEngine.Component;
 
 public class Buttons : MonoBehaviour
 {
@@ -13,7 +12,7 @@ public class Buttons : MonoBehaviour
     public Texture unmute;
 
     private SoundControl sound;
-    // Start is called before the first frame update
+
     void Start()
     {
         sound=Camera.main.GetComponent<SoundControl>();
@@ -34,15 +33,8 @@ public class Buttons : MonoBehaviour
                 sound.Stop();
                 break;
             case ButtonTypes.Mute:
-                sound.ToggleMute();
-				//if(sound.IsMute()){
-					//if(mute!=null)
-						//renderer.material.mainTexture=mute;
-				//} else {
-					//if(unmute!=null)
-							//renderer.material.mainTexture=unmute;
-				//}                
-			break;
+                sound.ToggleMute(); 
+			          break;
         }
     }
 }

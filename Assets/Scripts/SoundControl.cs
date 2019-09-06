@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
-//using UnityEngine.Component;
 
 public class SoundControl : MonoBehaviour
 {
@@ -29,12 +28,10 @@ public class SoundControl : MonoBehaviour
     {
         if(GetComponent<AudioSource>().mute){
             GetComponent<AudioSource>().mute=false;
-        } else {
+        }
+        else {
             GetComponent<AudioSource>().mute=true;
         }
     }
-
-    //public bool IsMute(){
-        //return audio.mute;
-    //}
+  
 }

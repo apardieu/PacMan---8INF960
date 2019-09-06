@@ -11,18 +11,17 @@ public class PointsManager : MonoBehaviour
     public string sceneVictory;
     public string sceneDefeat;
     private int nblife = 3;
-    // Start is called before the first frame update
+
     void Start()
     {
         gameEnded = false;
     }
+  
 
-    // Update is called once per frame
     void Update()
     {
         if("24600".Equals(scoreText.text)&&!gameEnded)
         {
-            print("end");
             gameEnded = true;
             changeScene();
         }
