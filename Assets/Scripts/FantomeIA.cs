@@ -17,12 +17,13 @@ public class FantomeIA : MonoBehaviour
   private int cpt = 0;
   private bool debut1 = false;
   private bool debut2 = false;
+  public bool warp = false;
 
   [SerializeField] private Tilemap tilemap;
 
 
 
-  void Start()
+  public void Start()
   {
     direction = Random.Range(0, 3);
     oldDirection = direction;
@@ -232,6 +233,16 @@ public class FantomeIA : MonoBehaviour
 
   void FixedUpdate()
   {
+
+    if (warp)
+    {
+      warp = false;
+      cpt = 0;
+      debut1 = true;
+      debut2 = true;
+      transform.position = new Vector2(0, 0.16f);
+    }
+
     if ((debut1 == true) || (debut2 == true))
       StartFantome();
 
