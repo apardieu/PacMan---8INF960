@@ -105,26 +105,35 @@ public class PacMaNMove : MonoBehaviour
 
    /* void fantomes()
     {
-        if(vulnerabilityCountDown<=0)
-        {
+
             Vector2 pos = transform.position;
             Collider2D hitFront = Physics2D.OverlapCircle(pos, 0.32f);
 
             if (hitFront.name == "blinky" || hitFront.name == "pinky" || hitFront.name == "inky" || hitFront.name == "clyde")
             {
-                print("fantome");
-                vulnerabilityCountDown = 50;
-                p.decrementeLife();
+                
+                StartCoroutine  (die());
 
             }
+        
+
+    }
+
+    IEnumerator die()
+    {
+
+        print("die");
+        pointManager.decrementeLife();
+        dest = new Vector2(0.16f, -0.8f);
+
+        blinky.StartFantome();
+        clyde.StartFantome();
+        foreach(GameObject ghost in GameObject.FindGameObjectsWithTag("ghost"))
+        {
+            print("BOUGE");
+            ghost.GetComponent<Transform>().transform.position = new Vector2(0.16f,-0.8f);
 
         }
-        else
-        {
-            vulnerabilityCountDown--;
-            
-        }
-        
 
     }*/
 

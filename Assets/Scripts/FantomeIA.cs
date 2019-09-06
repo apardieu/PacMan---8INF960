@@ -71,7 +71,7 @@ public class FantomeIA : MonoBehaviour
   }
 
 
-  void StartFantome()
+  public void StartFantome()
   {
     if (transform.name == "blinky")
     {
@@ -231,6 +231,7 @@ public class FantomeIA : MonoBehaviour
             //Debug.Log("Collision avec pacman: " + transform.name);
             
       return true;
+            
     }
     else
     {
