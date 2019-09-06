@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
+using UnityEngine.UI;
 
 public class FantomeIA : MonoBehaviour
 {
@@ -16,6 +18,8 @@ public class FantomeIA : MonoBehaviour
   private bool debut1 = false;
   private bool debut2 = false;
 
+  [SerializeField] private Tilemap tilemap;
+
 
 
   void Start()
@@ -27,11 +31,87 @@ public class FantomeIA : MonoBehaviour
   }
 
 
+  int ChassePacman2()
+  {
+    Vector3 positionPacman = GameObject.FindWithTag("pacman").transform.position;
+    Debug.Log(transform.position.ToString("F10") + "    " + positionPacman.ToString("F10") + "     " + transform.name);
+    Sprite sprite = null;
+    Debug.Log(System.Math.Round(transform.position.x, 2) == System.Math.Round(positionPacman.x, 2));
+    Debug.Log(System.Math.Round(transform.position.y, 2) == System.Math.Round(positionPacman.y, 2));
+
+
+    if (System.Math.Round(transform.position.x, 2) == System.Math.Round(positionPacman.x, 2)) //sur la meme ligne verticale
+    {
+      Debug.Log("Pacman sur meme ligne verticale    " + transform.name);
+      float difference = Mathf.Abs(positionPacman.y - transform.position.y);
+      float ratio = difference / step;
+
+      for (int i = 1; i < ratio; i++)
+      {
+        if (positionPacman.y >= transform.position.y) // pacman est au dessus du fantome
+          sprite = tilemap.GetSprite(tilemap.WorldToCell(new Vector2(transform.position.x, transform.position.y + i * step)));
+
+        else
+          sprite = tilemap.GetSprite(tilemap.WorldToCell(new Vector2(transform.position.x, transform.position.y - i * step)));
+
+        Debug.Log(sprite);
+        if (sprite == null)
+          return -1;
+        else if (!((sprite.name == "pacman_map_3") || (sprite.name == "pacman_map_6") || (sprite.name == "pacman_map_4")))
+          return -1;
+      }
+      if (positionPacman.y >= transform.position.y)
+      {
+        if (valid(0))
+          return 0;
+      }
+      else
+      {
+        if (valid(2))
+          return 2;
+      }
+
+    }
+    else if (System.Math.Round(transform.position.y, 2) == System.Math.Round(positionPacman.y, 2))
+    {
+      Debug.Log("Pacman sur meme ligne horizontale    " + transform.name);
+      float difference = Mathf.Abs(positionPacman.x - transform.position.x);
+      float ratio = difference / step;
+
+      for (int i = 1; i < ratio; i++)
+      {
+        if (positionPacman.x >= transform.position.x) //pacman est à droite du fantome
+          sprite = tilemap.GetSprite(tilemap.WorldToCell(new Vector2(transform.position.x + i * step, transform.position.y)));
+
+        else
+          sprite = tilemap.GetSprite(tilemap.WorldToCell(new Vector2(transform.position.x - i * step, transform.position.y)));
+
+        Debug.Log(sprite);
+        if (sprite == null)
+          return -1;
+        else if (!((sprite.name == "pacman_map_3") || (sprite.name == "pacman_map_6") || (sprite.name == "pacman_map_6")))
+          return -1;
+      }
+      if (positionPacman.x >= transform.position.x)
+      {
+        if(valid(1))
+         return 1;
+      }
+      else
+      {
+        if(valid(3))
+          return 3;
+      }
+        
+    }
+
+    return -1;
+  }
+
   int ChassePacman()
   {
     Vector2 positionPacman = GameObject.FindWithTag("pacman").transform.position;
     Vector2 difference = -((Vector2)transform.position - positionPacman);
-    //Debug.Log(difference.ToString("F4") + "   " + transform.position.ToString("F4") + "   " + positionPacman.ToString("F4") + "   " + transform.name);
     float choix1 = Mathf.Max(Mathf.Abs(difference.x), Mathf.Abs(difference.y));
     float choix2 = Mathf.Max(Mathf.Abs(difference.x), Mathf.Abs(difference.y));
     int directionChoix1 = -1;
@@ -157,47 +237,122 @@ public class FantomeIA : MonoBehaviour
 
     else
     {
+      int directionChassePacman;
       Vector2 p = Vector2.MoveTowards(transform.position, dest, speed);
       GetComponent<Rigidbody2D>().MovePosition(p);
 
 
       if ((Vector2)transform.position == p)
       {
-        oldDirection = direction;
-        direction = ChassePacman();
-        if (direction == (-1))
+        //oldDirection = direction;
+        directionChassePacman = ChassePacman2();
+        Debug.Log(directionChassePacman + "   " + transform.name);
+        if (directionChassePacman == (-1))
         {
-          if (valid(oldDirection))
-            direction = oldDirection;
-
-          else
+          if (direction == 0)
           {
-            while (!valid(direction))
+            if (valid(0))
             {
-              direction = Random.Range(0, 3);
+              dest.y = transform.position.y + step;
+              oldDirection = direction;
+            }
+            else
+            {
+              if ((oldDirection == 1) || (oldDirection == 3))
+                direction = 2;
+
+              else
+              {
+                while ((direction == 0) || (direction == 2))
+                {
+                  direction = Random.Range(0, 3);
+                }
+              }
             }
           }
+
+          else if (direction == 1)
+          {
+            if (valid(1))
+            {
+              dest.x = transform.position.x + step;
+              oldDirection = direction;
+            }
+            else
+            {
+              if ((oldDirection == 0) || (oldDirection == 2))
+                direction = 3;
+
+              else
+              {
+                while ((direction == 1) || (direction == 3))
+                {
+                  direction = Random.Range(0, 3);
+                }
+              }
+            }
+          }
+
+          else if (direction == 2)
+          {
+            if (valid(2))
+            {
+              dest.y = transform.position.y - step;
+              oldDirection = direction;
+            }
+            else
+            {
+              if ((oldDirection == 1) || (oldDirection == 3))
+                direction = 0;
+
+              else
+              {
+                while ((direction == 0) || (direction == 2))
+                {
+                  direction = Random.Range(0, 3);
+                }
+              }
+            }
+          }
+
+          else if (direction == 3)
+          {
+            if (valid(3))
+            {
+              dest.x = transform.position.x - step;
+              oldDirection = direction;
+            }
+            else
+            {
+              if ((oldDirection == 0) || (oldDirection == 2))
+                direction = 1;
+
+              else
+              {
+                while ((direction == 1) || (direction == 3))
+                {
+                  direction = Random.Range(0, 3);
+                }
+              }
+            }
+          }
+
         }
 
-        if (direction == 0)
+        else
         {
-          dest.y = transform.position.y + step;
+          direction = directionChassePacman;
+          if(direction == 0)
+            dest.y = transform.position.y + step;
+          else if(direction == 1)
+            dest.x = transform.position.x + step;
+          else if (direction == 2)
+            dest.y = transform.position.y - step;
+          else if (direction == 3)
+            dest.x = transform.position.x - step;
         }
-        else if (direction == 1)
-        {
-          dest.x = transform.position.x + step;
-        }
-        else if (direction == 2)
-        {
-          dest.y = transform.position.y - step;
-        }
-        else if (direction == 3)
-        {
-          dest.x = transform.position.x - step;
-        }
-
       }
-      
+
       Vector2 dir = dest - (Vector2)transform.position;
       GetComponent<Animator>().SetFloat("DirX", dir.x);
       GetComponent<Animator>().SetFloat("DirY", dir.y);
@@ -226,10 +381,10 @@ public class FantomeIA : MonoBehaviour
     {
       return false;
     }
-    else if(hit.collider.name == "pacman")
+    else if (hit.collider.name == "pacman")
     {
-            //Debug.Log("Collision avec pacman: " + transform.name);
-            
+      //Debug.Log("Collision avec pacman: " + transform.name);
+
       return true;
     }
     else
@@ -237,8 +392,8 @@ public class FantomeIA : MonoBehaviour
       return true;
     }
   }
-    void OnCollisionEnter2D(Collision2D col)
-    {
-       print("Ghost");
-    }
+  void OnCollisionEnter2D(Collision2D col)
+  {
+    print("Ghost");
+  }
 }
