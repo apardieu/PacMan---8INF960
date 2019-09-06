@@ -276,9 +276,6 @@ MonoBehaviour:
   speed: 0.05
   step: 0.32
   stepCollider: 0.32
-  cpt: 0
-  debut1: 0
-  debut2: 0
   warp: 0
   tilemap: {fileID: 928984703}
 --- !u!1 &43307919
@@ -3718,9 +3715,6 @@ MonoBehaviour:
   speed: 0.05
   step: 0.32
   stepCollider: 0.32
-  cpt: 0
-  debut1: 0
-  debut2: 0
   warp: 0
   tilemap: {fileID: 928984703}
 --- !u!95 &1393198911
@@ -3968,9 +3962,6 @@ MonoBehaviour:
   speed: 0.05
   step: 0.32
   stepCollider: 0.32
-  cpt: 0
-  debut1: 0
-  debut2: 0
   warp: 0
   tilemap: {fileID: 928984703}
 --- !u!1 &1511735935
@@ -4023,7 +4014,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.24313726, g: 0.74509805, b: 0.011764692, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -4216,9 +4207,6 @@ MonoBehaviour:
   speed: 0.05
   step: 0.32
   stepCollider: 0.32
-  cpt: 0
-  debut1: 0
-  debut2: 0
   warp: 0
   tilemap: {fileID: 928984703}
 --- !u!1 &1854078057
