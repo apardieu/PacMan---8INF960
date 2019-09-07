@@ -549,7 +549,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   step: 0.32
   stepCollider: 0.32
-  p: {fileID: 1854078058}
+  pointsManager: {fileID: 1854078058}
   inky: {fileID: 1412506252}
   pinky: {fileID: 6524874}
   blinky: {fileID: 1792187409}
@@ -2515,15 +2515,6 @@ Tilemap:
       m_ObjectToInstantiate: {fileID: 0}
       m_TileFlags: 1
       m_ColliderType: 1
-  - first: {x: -15, y: 0, z: 0}
-    second:
-      m_TileIndex: 3
-      m_TileSpriteIndex: 3
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_ObjectToInstantiate: {fileID: 0}
-      m_TileFlags: 1
-      m_ColliderType: 1
   - first: {x: -14, y: 0, z: 0}
     second:
       m_TileIndex: 1
@@ -2699,15 +2690,6 @@ Tilemap:
     second:
       m_TileIndex: 1
       m_TileSpriteIndex: 1
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_ObjectToInstantiate: {fileID: 0}
-      m_TileFlags: 1
-      m_ColliderType: 1
-  - first: {x: 14, y: 0, z: 0}
-    second:
-      m_TileIndex: 3
-      m_TileSpriteIndex: 3
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_ObjectToInstantiate: {fileID: 0}
@@ -3873,8 +3855,8 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: 2d800c59571f50e4cab0f75a85e29bc9, type: 2}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 2
-    m_Data: {fileID: 11400000, guid: b0d99b6d906adff41bc7f0e79d57e8fd, type: 2}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   m_TileSpriteArray:
   - m_RefCount: 246
     m_Data: {fileID: 21300006, guid: 4a40dd4a7a817db4c8f018e6a8c8bb07, type: 3}
@@ -3882,10 +3864,10 @@ Tilemap:
     m_Data: {fileID: 21300012, guid: 4a40dd4a7a817db4c8f018e6a8c8bb07, type: 3}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 2
-    m_Data: {fileID: 21300000, guid: d415279dc8e1e77409dcbf2f6348aec7, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   m_TileMatrixArray:
-  - m_RefCount: 302
+  - m_RefCount: 300
     m_Data:
       e00: 1
       e01: 0
@@ -3904,7 +3886,7 @@ Tilemap:
       e32: 0
       e33: 1
   m_TileColorArray:
-  - m_RefCount: 302
+  - m_RefCount: 300
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -3988,7 +3970,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreText: {fileID: 1511735937}
   tilemap: {fileID: 928984703}
-  spriteBleu: {fileID: 11400000, guid: 2d800c59571f50e4cab0f75a85e29bc9, type: 2}
+  spriteBlue: {fileID: 11400000, guid: 2d800c59571f50e4cab0f75a85e29bc9, type: 2}
   pacmanRigidBody: {fileID: 43307923}
 --- !u!1 &1059482802
 GameObject:

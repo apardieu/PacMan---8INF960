@@ -6,17 +6,17 @@ using UnityEngine.UI;
 
 public class FantomeIA : MonoBehaviour
 {
-    private Vector2 dest = Vector2.zero;
-    private Vector2 destDebut1 = new Vector2(0, 1.12f);
-    private Vector2 destDebut2 = new Vector2(0.48f, 1.12f);
+    private Vector2 destination = Vector2.zero;
+    private Vector2 destinationStart1 = new Vector2(0, 1.12f);
+    private Vector2 destinationStart2 = new Vector2(0.48f, 1.12f);
     private int direction;
     private int oldDirection;
     public float speed = 0.05f;
     public float step = 0.32f;
     public float stepCollider = 0.32f;
-    private int cpt = 0;
-    private bool debut1 = false;
-    private bool debut2 = false;
+    private int counter = 0;
+    private bool start1 = false;
+    private bool start2 = false;
     public bool warp = false;
 
     [SerializeField] private Tilemap tilemap;
@@ -27,35 +27,31 @@ public class FantomeIA : MonoBehaviour
     {
         direction = Random.Range(0, 3);
         oldDirection = direction;
-        debut1 = true;
-        debut2 = true;
+        start1 = true;
+        start2 = true;
     }
 
 
-    int ChassePacman2()
+    int ChasePacman()
     {
         Vector3 positionPacman = GameObject.FindWithTag("pacman").transform.position;
 
         Sprite sprite = null;
-        Debug.Log(System.Math.Round(transform.position.x, 2) == System.Math.Round(positionPacman.x, 2));
-        Debug.Log(System.Math.Round(transform.position.y, 2) == System.Math.Round(positionPacman.y, 2));
 
 
-        if (System.Math.Round(transform.position.x, 2) == System.Math.Round(positionPacman.x, 2)) //sur la meme ligne verticale
+        if (System.Math.Round(transform.position.x, 2) == System.Math.Round(positionPacman.x, 2)) //on the same horizontal line
         {
-            Debug.Log("Pacman sur meme ligne verticale    " + transform.name);
             float difference = Mathf.Abs(positionPacman.y - transform.position.y);
             float ratio = difference / step;
 
             for (int i = 1; i < ratio; i++)
             {
-                if (positionPacman.y >= transform.position.y) // pacman est au dessus du fantome
+                if (positionPacman.y >= transform.position.y) // pacman is on top of the ghost
                     sprite = tilemap.GetSprite(tilemap.WorldToCell(new Vector2(transform.position.x, transform.position.y + i * step)));
 
                 else
                     sprite = tilemap.GetSprite(tilemap.WorldToCell(new Vector2(transform.position.x, transform.position.y - i * step)));
-
-                Debug.Log(sprite);
+                
                 if (sprite == null)
                     return -1;
                 else if (!((sprite.name == "pacman_map_3") || (sprite.name == "pacman_map_6") || (sprite.name == "pacman_map_4")))
@@ -63,31 +59,29 @@ public class FantomeIA : MonoBehaviour
             }
             if (positionPacman.y >= transform.position.y)
             {
-                if (valid(0))
+                if (ColliderCheck(0))
                     return 0;
             }
             else
             {
-                if (valid(2))
+                if (ColliderCheck(2))
                     return 2;
             }
 
         }
         else if (System.Math.Round(transform.position.y, 2) == System.Math.Round(positionPacman.y, 2))
         {
-            Debug.Log("Pacman sur meme ligne horizontale    " + transform.name);
             float difference = Mathf.Abs(positionPacman.x - transform.position.x);
             float ratio = difference / step;
 
             for (int i = 1; i < ratio; i++)
             {
-                if (positionPacman.x >= transform.position.x) //pacman est à droite du fantome
+                if (positionPacman.x >= transform.position.x) //pacman is on the right 
                     sprite = tilemap.GetSprite(tilemap.WorldToCell(new Vector2(transform.position.x + i * step, transform.position.y)));
 
                 else
                     sprite = tilemap.GetSprite(tilemap.WorldToCell(new Vector2(transform.position.x - i * step, transform.position.y)));
-
-                Debug.Log(sprite);
+                
                 if (sprite == null)
                     return -1;
                 else if (!((sprite.name == "pacman_map_3") || (sprite.name == "pacman_map_6") || (sprite.name == "pacman_map_6")))
@@ -95,12 +89,12 @@ public class FantomeIA : MonoBehaviour
             }
             if (positionPacman.x >= transform.position.x)
             {
-                if (valid(1))
+                if (ColliderCheck(1))
                     return 1;
             }
             else
             {
-                if (valid(3))
+                if (ColliderCheck(3))
                     return 3;
             }
 
@@ -109,126 +103,83 @@ public class FantomeIA : MonoBehaviour
         return -1;
     }
 
-    int ChassePacman()
-    {
-        Vector2 positionPacman = GameObject.FindWithTag("pacman").transform.position;
-        Vector2 difference = -((Vector2)transform.position - positionPacman);
-        float choix1 = Mathf.Max(Mathf.Abs(difference.x), Mathf.Abs(difference.y));
-        float choix2 = Mathf.Max(Mathf.Abs(difference.x), Mathf.Abs(difference.y));
-        int directionChoix1 = -1;
-        int directionChoix2 = -1;
-        if (choix1 == Mathf.Abs(difference.x))
-        {
-            if (difference.x >= 0)
-                directionChoix1 = 1;
-            else
-                directionChoix1 = 3;
-
-            if (difference.y >= 0)
-                directionChoix2 = 0;
-            else
-                directionChoix2 = 2;
-        }
-        else if (choix1 == Mathf.Abs(difference.y))
-        {
-            if (difference.y >= 0)
-                directionChoix1 = 0;
-            else
-                directionChoix1 = 2;
-
-            if (difference.x >= 0)
-                directionChoix2 = 1;
-            else
-                directionChoix2 = 3;
-        }
-
-        if (valid(directionChoix1))
-            return directionChoix1;
-        else if (valid(directionChoix2))
-            return directionChoix2;
-        else
-            return -1;
-
-    }
-
-
-    public void StartFantome()
+    public void InitGhost()
     {
         if (transform.name == "blinky")
         {
-            Vector2 p = Vector2.MoveTowards(transform.position, destDebut1, speed);
-            GetComponent<Rigidbody2D>().MovePosition(p);
-            if ((Vector2)transform.position == destDebut1)
-                debut1 = false;
-            if ((debut1 == false) && (debut2 == true))
+            Vector2 tempPosition = Vector2.MoveTowards(transform.position, destinationStart1, speed);
+            GetComponent<Rigidbody2D>().MovePosition(tempPosition);
+            if ((Vector2)transform.position == destinationStart1)
+                start1 = false;
+            if ((start1 == false) && (start2 == true))
             {
-                p = Vector2.MoveTowards(transform.position, destDebut2, speed);
-                GetComponent<Rigidbody2D>().MovePosition(p);
+                tempPosition = Vector2.MoveTowards(transform.position, destinationStart2, speed);
+                GetComponent<Rigidbody2D>().MovePosition(tempPosition);
             }
-            if ((Vector2)transform.position == destDebut2)
-                debut2 = false;
+            if ((Vector2)transform.position == destinationStart2)
+                start2 = false;
 
 
         }
 
         else if (transform.name == "clyde")
         {
-            if (cpt >= 180)
+            if (counter >= 180)
             {
-                Vector2 p = Vector2.MoveTowards(transform.position, destDebut1, speed);
-                GetComponent<Rigidbody2D>().MovePosition(p);
-                if ((Vector2)transform.position == destDebut1)
-                    debut1 = false;
-                if ((debut1 == false) && (debut2 == true))
+                Vector2 tempPosition = Vector2.MoveTowards(transform.position, destinationStart1, speed);
+                GetComponent<Rigidbody2D>().MovePosition(tempPosition);
+                if ((Vector2)transform.position == destinationStart1)
+                    start1 = false;
+                if ((start1 == false) && (start2 == true))
                 {
-                    p = Vector2.MoveTowards(transform.position, destDebut2, speed);
-                    GetComponent<Rigidbody2D>().MovePosition(p);
+                    tempPosition = Vector2.MoveTowards(transform.position, destinationStart2, speed);
+                    GetComponent<Rigidbody2D>().MovePosition(tempPosition);
                 }
-                if ((Vector2)transform.position == destDebut2)
-                    debut2 = false;
+                if ((Vector2)transform.position == destinationStart2)
+                    start2 = false;
             }
         }
 
         else if (transform.name == "inky")
         {
-            if (cpt >= 360)
+            if (counter >= 360)
             {
-                Vector2 p = Vector2.MoveTowards(transform.position, destDebut1, speed);
-                GetComponent<Rigidbody2D>().MovePosition(p);
-                if ((Vector2)transform.position == destDebut1)
-                    debut1 = false;
-                if ((debut1 == false) && (debut2 == true))
+                Vector2 tempPosition = Vector2.MoveTowards(transform.position, destinationStart1, speed);
+                GetComponent<Rigidbody2D>().MovePosition(tempPosition);
+                if ((Vector2)transform.position == destinationStart1)
+                    start1 = false;
+                if ((start1 == false) && (start2 == true))
                 {
-                    p = Vector2.MoveTowards(transform.position, destDebut2, speed);
-                    GetComponent<Rigidbody2D>().MovePosition(p);
+                    tempPosition = Vector2.MoveTowards(transform.position, destinationStart2, speed);
+                    GetComponent<Rigidbody2D>().MovePosition(tempPosition);
                 }
-                if ((Vector2)transform.position == destDebut2)
-                    debut2 = false;
+                if ((Vector2)transform.position == destinationStart2)
+                    start2 = false;
             }
         }
 
         else if (transform.name == "pinky")
         {
-            if (cpt >= 480)
+            if (counter >= 480)
             {
-                Vector2 p = Vector2.MoveTowards(transform.position, destDebut1, speed);
-                GetComponent<Rigidbody2D>().MovePosition(p);
-                if ((Vector2)transform.position == destDebut1)
-                    debut1 = false;
-                if ((debut1 == false) && (debut2 == true))
+                Vector2 tempPosition = Vector2.MoveTowards(transform.position, destinationStart1, speed);
+                GetComponent<Rigidbody2D>().MovePosition(tempPosition);
+                if ((Vector2)transform.position == destinationStart1)
+                    start1 = false;
+                if ((start1 == false) && (start2 == true))
                 {
-                    p = Vector2.MoveTowards(transform.position, destDebut2, speed);
-                    GetComponent<Rigidbody2D>().MovePosition(p);
+                    tempPosition = Vector2.MoveTowards(transform.position, destinationStart2, speed);
+                    GetComponent<Rigidbody2D>().MovePosition(tempPosition);
                 }
-                if ((Vector2)transform.position == destDebut2)
-                    debut2 = false;
+                if ((Vector2)transform.position == destinationStart2)
+                    start2 = false;
             }
         }
 
-        if (debut2 == false)
-            dest = transform.position;
+        if (start2 == false)
+            destination = transform.position;
 
-        cpt++;
+        counter++;
     }
 
     void FixedUpdate()
@@ -237,19 +188,19 @@ public class FantomeIA : MonoBehaviour
         if (warp)
         {
             warp = false;
-            cpt = 0;
-            debut1 = true;
-            debut2 = true;
+            counter = 0;
+            start1 = true;
+            start2 = true;
             transform.position = new Vector2(0, 0.16f);
         }
 
-        if ((debut1 == true) || (debut2 == true))
-            StartFantome();
+        if ((start1 == true) || (start2 == true))
+            InitGhost();
 
         else
         {
-            int directionChassePacman;
-            Vector2 p = Vector2.MoveTowards(transform.position, dest, speed);
+            int directionChasePacman;
+            Vector2 p = Vector2.MoveTowards(transform.position, destination, speed);
             GetComponent<Rigidbody2D>().MovePosition(p);
 
 
@@ -257,16 +208,14 @@ public class FantomeIA : MonoBehaviour
             {
                 speed = 0.05f;
 
-                //oldDirection = direction;
-                directionChassePacman = ChassePacman2();
-                Debug.Log(directionChassePacman + "   " + transform.name);
-                if (directionChassePacman == (-1))
+                directionChasePacman = ChasePacman();
+                if (directionChasePacman == (-1))
                 {
-                    if (direction == 0)
+                    if (direction == 0) //up
                     {
-                        if (valid(0))
+                        if (ColliderCheck(0))
                         {
-                            dest.y = transform.position.y + step;
+                            destination.y = transform.position.y + step;
                             oldDirection = direction;
                         }
                         else
@@ -284,14 +233,14 @@ public class FantomeIA : MonoBehaviour
                         }
                     }
 
-                    else if (direction == 1)
+                    else if (direction == 1) //right
                     {
-                        if (valid(1))
+                        if (ColliderCheck(1))
                         {
-                                dest.x = transform.position.x + step;
-                            if (dest.x > 4.317f)
+                                destination.x = transform.position.x + step;
+                            if (destination.x > 4.317f)
                             {
-                                dest.x = -4.317f;
+                                destination.x = -4.317f;
                                 speed = 10000;
                             }
 
@@ -313,11 +262,11 @@ public class FantomeIA : MonoBehaviour
                         }
                     }
 
-                    else if (direction == 2)
+                    else if (direction == 2) //down
                     {
-                        if (valid(2))
+                        if (ColliderCheck(2))
                         {
-                            dest.y = transform.position.y - step;
+                            destination.y = transform.position.y - step;
                             oldDirection = direction;
                         }
                         else
@@ -335,14 +284,14 @@ public class FantomeIA : MonoBehaviour
                         }
                     }
 
-                    else if (direction == 3)
+                    else if (direction == 3) //left
                     {
-                        if (valid(3))
+                        if (ColliderCheck(3))
                         {
-                            dest.x = transform.position.x - step;
-                            if (dest.x < -4.317f)
+                            destination.x = transform.position.x - step;
+                            if (destination.x < -4.317f)
                             {
-                                dest.x = 4.317f;
+                                destination.x = 4.317f;
                                 speed = 10000;
                             }
 
@@ -367,26 +316,26 @@ public class FantomeIA : MonoBehaviour
 
                 else
                 {
-                    direction = directionChassePacman;
+                    direction = directionChasePacman;
                     if (direction == 0)
-                        dest.y = transform.position.y + step;
+                        destination.y = transform.position.y + step;
                     else if (direction == 1)
-                        dest.x = transform.position.x + step;
+                        destination.x = transform.position.x + step;
                     else if (direction == 2)
-                        dest.y = transform.position.y - step;
+                        destination.y = transform.position.y - step;
                     else if (direction == 3)
-                        dest.x = transform.position.x - step;
+                        destination.x = transform.position.x - step;
                 }
             }
 
-            Vector2 dir = dest - (Vector2)transform.position;
-            GetComponent<Animator>().SetFloat("DirX", dir.x);
-            GetComponent<Animator>().SetFloat("DirY", dir.y);
+            Vector2 animation = destination - (Vector2)transform.position;
+            GetComponent<Animator>().SetFloat("DirX", animation.x);
+            GetComponent<Animator>().SetFloat("DirY", animation.y);
         }
     }
 
 
-    bool valid(int direction)
+    bool ColliderCheck (int direction)
     {
         if (direction == (-1))
             return false;
@@ -407,20 +356,10 @@ public class FantomeIA : MonoBehaviour
         {
             return false;
         }
-        else if (hit.collider.name == "pacman")
-        {
-            //Debug.Log("Collision avec pacman: " + transform.name);
-
-            return true;
-
-        }
         else
         {
             return true;
         }
     }
-    void OnCollisionEnter2D(Collision2D col)
-    {
-        print("Ghost");
-    }
+    
 }
